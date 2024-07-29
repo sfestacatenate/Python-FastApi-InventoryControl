@@ -43,6 +43,16 @@ def delete_warehouse(db: Session, warehouse_id: int):
     if db_warehouse is None:
         raise ErrorHandler.not_found("Warehouse")
     try:
+        db.query(models.Product).filter(models.Product.warehouse_id == warehouse_id).delete()
+        
+        order_items_to_delete = db.query(models.OrderItem).join(models.Product).filter(models.Product.warehouse_id == warehouse_id).all()
+        for order_item in order_items_to_delete:
+            db.delete(order_item)
+
+        orders_to_delete = db.query(models.Order).join(models.OrderItem).join(models.Product).filter(models.Product.warehouse_id == warehouse_id).all()
+        for order in orders_to_delete:
+            db.delete(order)
+
         db.delete(db_warehouse)
         db.commit()
         return db_warehouse
