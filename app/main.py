@@ -1,7 +1,8 @@
-from fastapi import FastAPI, Depends, HTTPException
+from fastapi import FastAPI, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from . import crud, models, schemas
 from database.main import SessionLocal, engine
+from .exceptions import ErrorHandler
 
 models.Base.metadata.create_all(bind=engine)
 
@@ -21,8 +22,11 @@ def create_warehouse(warehouse: schemas.WarehouseCreate, db: Session = Depends(g
 
 @app.get("/warehouses/", response_model=list[schemas.Warehouse])
 def read_warehouses(skip: int = 0, limit: int = 10, db: Session = Depends(get_db)):
-    warehouses = crud.get_warehouses(db, skip=skip, limit=limit)
-    return warehouses
+    return crud.get_warehouses(db, skip=skip, limit=limit)
+
+@app.get("/warehouses/{warehouse_id}", response_model=schemas.Warehouse)
+def read_warehouse(warehouse_id: int, db: Session = Depends(get_db)):
+    return crud.get_warehouse(db, warehouse_id)
 
 @app.put("/warehouses/{warehouse_id}", response_model=schemas.Warehouse)
 def update_warehouse(warehouse_id: int, warehouse: schemas.WarehouseCreate, db: Session = Depends(get_db)):
@@ -38,8 +42,11 @@ def create_product(product: schemas.ProductCreate, warehouse_id: int, db: Sessio
 
 @app.get("/products/", response_model=list[schemas.Product])
 def read_products(skip: int = 0, limit: int = 10, db: Session = Depends(get_db)):
-    products = crud.get_products(db, skip=skip, limit=limit)
-    return products
+    return crud.get_products(db, skip=skip, limit=limit)
+
+@app.get("/products/{product_id}", response_model=schemas.Product)
+def read_product(product_id: int, db: Session = Depends(get_db)):
+    return crud.get_product(db, product_id)
 
 @app.put("/products/{product_id}", response_model=schemas.Product)
 def update_product(product_id: int, product: schemas.ProductCreate, db: Session = Depends(get_db)):
@@ -55,8 +62,11 @@ def create_customer(customer: schemas.CustomerCreate, db: Session = Depends(get_
 
 @app.get("/customers/", response_model=list[schemas.Customer])
 def read_customers(skip: int = 0, limit: int = 10, db: Session = Depends(get_db)):
-    customers = crud.get_customers(db, skip=skip, limit=limit)
-    return customers
+    return crud.get_customers(db, skip=skip, limit=limit)
+
+@app.get("/customers/{customer_id}", response_model=schemas.Customer)
+def read_customer(customer_id: int, db: Session = Depends(get_db)):
+    return crud.get_customer(db, customer_id)
 
 @app.put("/customers/{customer_id}", response_model=schemas.Customer)
 def update_customer(customer_id: int, customer: schemas.CustomerCreate, db: Session = Depends(get_db)):
@@ -72,8 +82,11 @@ def create_order(order: schemas.OrderCreate, customer_id: int, db: Session = Dep
 
 @app.get("/orders/", response_model=list[schemas.Order])
 def read_orders(skip: int = 0, limit: int = 10, db: Session = Depends(get_db)):
-    orders = crud.get_orders(db, skip=skip, limit=limit)
-    return orders
+    return crud.get_orders(db, skip=skip, limit=limit)
+
+@app.get("/orders/{order_id}", response_model=schemas.Order)
+def read_order(order_id: int, db: Session = Depends(get_db)):
+    return crud.get_order(db, order_id)
 
 @app.put("/orders/{order_id}", response_model=schemas.Order)
 def update_order(order_id: int, order: schemas.OrderCreate, db: Session = Depends(get_db)):
@@ -89,8 +102,11 @@ def create_order_item(order_item: schemas.OrderItemCreate, order_id: int, db: Se
 
 @app.get("/order_items/", response_model=list[schemas.OrderItem])
 def read_order_items(skip: int = 0, limit: int = 10, db: Session = Depends(get_db)):
-    order_items = crud.get_order_items(db, skip=skip, limit=limit)
-    return order_items
+    return crud.get_order_items(db, skip=skip, limit=limit)
+
+@app.get("/order_items/{order_item_id}", response_model=schemas.OrderItem)
+def read_order_item(order_item_id: int, db: Session = Depends(get_db)):
+    return crud.get_order_item(db, order_item_id)
 
 @app.put("/order_items/{order_item_id}", response_model=schemas.OrderItem)
 def update_order_item(order_item_id: int, order_item: schemas.OrderItemCreate, db: Session = Depends(get_db)):
