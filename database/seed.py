@@ -5,7 +5,7 @@ import os
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from sqlalchemy.orm import Session
-from app.database import SessionLocal, engine
+from database.main import SessionLocal, engine
 from app import models
 
 # Crea tutte le tabelle
