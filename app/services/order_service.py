@@ -43,6 +43,8 @@ def delete_order(db: Session, order_id: int):
     if db_order is None:
         raise ErrorHandler.not_found("Order")
     try:
+        db.query(models.OrderItem).filter(models.OrderItem.order_id == order_id).delete()
+
         db.delete(db_order)
         db.commit()
         return db_order

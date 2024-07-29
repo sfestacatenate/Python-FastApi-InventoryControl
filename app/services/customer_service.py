@@ -43,6 +43,9 @@ def delete_customer(db: Session, customer_id: int):
     if db_customer is None:
         raise ErrorHandler.not_found("Customer")
     try:
+        db.query(models.OrderItem).join(models.Order).filter(models.Order.customer_id == customer_id).delete()
+        db.query(models.Order).filter(models.Order.customer_id == customer_id).delete()
+
         db.delete(db_customer)
         db.commit()
         return db_customer

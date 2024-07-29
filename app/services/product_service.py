@@ -44,6 +44,12 @@ def delete_product(db: Session, product_id: int):
     if db_product is None:
         raise ErrorHandler.not_found("Product")
     try:
+        db.query(models.OrderItem).filter(models.OrderItem.product_id == product_id).delete()
+
+        orders_to_delete = db.query(models.Order).join(models.OrderItem).filter(models.OrderItem.product_id == product_id).all()
+        for order in orders_to_delete:
+            db.delete(order)
+
         db.delete(db_product)
         db.commit()
         return db_product
