@@ -1,4 +1,3 @@
-# database.py
 from sqlalchemy import create_engine
 import sqlalchemy
 from sqlalchemy.ext.declarative import declarative_base
@@ -12,7 +11,6 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 Base = sqlalchemy.orm.declarative_base()
 
-# Dependency
 def get_db():
     db = SessionLocal()
     try:

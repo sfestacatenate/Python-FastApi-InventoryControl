@@ -1,20 +1,16 @@
 import sys
 import os
 
-# Aggiungi il percorso del progetto al sys.path
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from sqlalchemy.orm import Session
 from database.main import SessionLocal, engine
 from app import models
 
-# Crea tutte le tabelle
 models.Base.metadata.create_all(bind=engine)
 
-# Crea una sessione
 db: Session = SessionLocal()
 
-# Aggiungi dati iniziali
 warehouse1 = models.Warehouse(name="Main Warehouse", location="City Center")
 warehouse2 = models.Warehouse(name="Secondary Warehouse", location="Uptown")
 
@@ -28,7 +24,6 @@ order1 = models.Order(order_date="2023-07-20", customer=customer1)
 order_item1 = models.OrderItem(order=order1, product=product1, quantity=10)
 order_item2 = models.OrderItem(order=order1, product=product2, quantity=5)
 
-# Aggiungi tutto al database
 db.add(warehouse1)
 db.add(warehouse2)
 db.add(product1)

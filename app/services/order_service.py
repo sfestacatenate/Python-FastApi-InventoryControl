@@ -2,7 +2,6 @@ from sqlalchemy.orm import Session
 from .. import models, schemas
 from ..exceptions import ErrorHandler
 
-# Order CRUD
 def get_order(db: Session, order_id: int):
     order = db.query(models.Order).filter(models.Order.id == order_id).first()
     if order is None:

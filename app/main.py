@@ -7,7 +7,6 @@ models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
-# Includi i router dai controller
 app.include_router(warehouse_controller.router, prefix="/warehouses", tags=["warehouses"])
 app.include_router(product_controller.router, prefix="/products", tags=["products"])
 app.include_router(customer_controller.router, prefix="/customers", tags=["customers"])
