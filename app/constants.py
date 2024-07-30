@@ -1,0 +1,1 @@
+SQLALCHEMY_DATABASE_TEST_URL = "sqlite:///:memory:"
