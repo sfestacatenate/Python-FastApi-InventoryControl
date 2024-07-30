@@ -1,0 +1,16 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: pytest",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "pytest",
+            "args": [
+                "${workspaceFolder}/tests"  // Percorso alla directory dei test
+            ],
+            "console": "integratedTerminal",
+            "justMyCode": false
+        }
+    ]
+}

@@ -2,7 +2,7 @@ import pytest
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from app.models import Base, Customer
-from app.schemas import OrderCreate
+from app.schemas import Order, OrderCreate
 from app.services import order_service
 from app.constants import SQLALCHEMY_DATABASE_TEST_URL
 
@@ -50,7 +50,7 @@ def test_get_order(db):
 
 def test_update_order(db):
     order = order_service.get_orders(db, skip=0, limit=1)[0]
-    update_data = OrderCreate(order_date="2023-01-02")
+    update_data = Order(id=order.id, order_date="2023-01-02", customer_id=order.customer_id)
     updated_order = order_service.update_order(db=db, order_id=order.id, order=update_data)
     assert updated_order.order_date == "2023-01-02"
 
