@@ -9,8 +9,8 @@ class WarehouseCreate(WarehouseBase):
 
 class Warehouse(WarehouseBase):
     id: int
-    class Config:
-        orm_mode = True
+    class ConfigDict:
+        from_attributes = True
 
 class ProductBase(BaseModel):
     name: str
@@ -24,8 +24,8 @@ class ProductCreate(ProductBase):
 class Product(ProductBase):
     id: int
     warehouse_id: int
-    class Config:
-        orm_mode = True
+    class ConfigDict:
+        from_attributes = True
 
 class CustomerBase(BaseModel):
     name: str
@@ -37,8 +37,8 @@ class CustomerCreate(CustomerBase):
 
 class Customer(CustomerBase):
     id: int
-    class Config:
-        orm_mode = True
+    class ConfigDict:
+        from_attributes = True
 
 class OrderBase(BaseModel):
     order_date: str
@@ -49,8 +49,8 @@ class OrderCreate(OrderBase):
 class Order(OrderBase):
     id: int
     customer_id: int
-    class Config:
-        orm_mode = True
+    class ConfigDict:
+        from_attributes = True
 
 class OrderItemBase(BaseModel):
     quantity: int
@@ -62,5 +62,5 @@ class OrderItem(OrderItemBase):
     id: int
     order_id: int
     product_id: int
-    class Config:
-        orm_mode = True
+    class ConfigDict:
+        from_attributes = True

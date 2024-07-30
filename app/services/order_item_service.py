@@ -16,7 +16,7 @@ def get_order_items(db: Session, skip: int = 0, limit: int = 10):
 
 def create_order_item(db: Session, order_item: schemas.OrderItemCreate, order_id: int):
     try:
-        db_order_item = models.OrderItem(**order_item.dict(), order_id=order_id)
+        db_order_item = models.OrderItem(**order_item.model_dump(), order_id=order_id)
         db.add(db_order_item)
         db.commit()
         db.refresh(db_order_item)

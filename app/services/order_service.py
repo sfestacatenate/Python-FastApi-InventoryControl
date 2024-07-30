@@ -17,7 +17,7 @@ def get_orders(db: Session, skip: int = 0, limit: int = 10):
 
 def create_order(db: Session, order: schemas.OrderCreate, customer_id: int):
     try:
-        db_order = models.Order(**order.dict(), customer_id=customer_id)
+        db_order = models.Order(**order.model_dump(), customer_id=customer_id)
         db.add(db_order)
         db.commit()
         db.refresh(db_order)

@@ -16,7 +16,7 @@ def get_customers(db: Session, skip: int = 0, limit: int = 10):
 
 def create_customer(db: Session, customer: schemas.CustomerCreate):
     try:
-        db_customer = models.Customer(**customer.dict())
+        db_customer = models.Customer(**customer.model_dump())
         db.add(db_customer)
         db.commit()
         db.refresh(db_customer)

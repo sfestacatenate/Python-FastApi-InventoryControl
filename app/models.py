@@ -1,9 +1,10 @@
 # models.py
 from sqlalchemy import Column, ForeignKey, Integer, String, Float
+import sqlalchemy
 from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
 
-Base = declarative_base()
+Base = sqlalchemy.orm.declarative_base()
 
 class Warehouse(Base):
     __tablename__ = 'warehouses'
