@@ -9,6 +9,7 @@ Python-FastApi-InventoryControl is a backend web application designed to manage 
 - **FastAPI**: For building the web API.
 - **SQLAlchemy**: For ORM (Object Relational Mapping) and database interactions.
 - **Alembic**: For database migrations.
+- **Pydantic**: For data validation.
 - **Docker**: For containerization and easy deployment.
 - **Pytest**: For running tests and ensuring code reliability.
 
