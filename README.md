@@ -2,7 +2,7 @@
 
 ## Project Description
 
-Python-FastApi-InventoryControl is a backend web application designed to manage inventory using FastAPI. This project provides a robust system for performing CRUD (Create, Read, Update, Delete) operations on various inventory entities, ensuring efficient and scalable inventory management. The application is currently only backend.
+Python-FastApi-InventoryControl is a backend web application designed to manage inventory using FastAPI. This project provides a robust system for performing CRUD (Create, Read, Update, Delete) operations on various inventory entities, ensuring efficient and scalable inventory management.
 
 ## Technologies Used
 
